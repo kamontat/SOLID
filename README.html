@@ -1,0 +1,53 @@
+<h1 id="solidprinciplesbadgeeducationhttpsimgshieldsiobadgeobjectiveeducationredsvgbadgeeducationhttpsimgshieldsiobadgesyntaxmarkdownbluesvg">SOLID Principles <img src="https://img.shields.io/badge/objective-education-red.svg" alt="badge-education" /> <img src="https://img.shields.io/badge/syntax-markdown-blue.svg" alt="badge-education" /></h1>
+<p>This project get code from <a href="https://github.com/mikeknep/SOLID">https://github.com/mikeknep/SOLID</a>, For <strong>education</strong> only.
+I recommend you to read this manual inside <a href="https://github.com/kamontat/SOLID">Github</a> website for better view.</p>
+<h2 id="tableofcontents">Table of contents</h2>
+<ul>
+<li><a href="#solid-principles-badge-education-badge-education">SOLID Principles !badge-education !badge-education</a><ul>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#description">Description</a><ul>
+<li><a href="#dependency-inversion-principle">Dependency Inversion Principle</a></li>
+<li><a href="#interface-segregation-principle">Interface Segregation Principle</a></li>
+<li><a href="#liskov-substitution-principle">Liskov Substitution Principle</a></li>
+<li><a href="#open-closed-principle">Open Closed Principle</a></li>
+<li><a href="#single-responsibility-principle">Single Responsibility Principle</a></li></ul></li>
+<li><a href="#images">Images</a></li>
+<li><a href="#creator">Creator</a></li></ul></li>
+</ul>
+<h2 id="description">Description</h2>
+<h3 id="dependencyinversionprinciplesrccomkamontatdependency_inversion"><a href="./src/com/kamontat/dependency_inversion">Dependency Inversion Principle</a></h3>
+<blockquote>
+  <p>In high-level modules should not depend on low-level modules.</p>
+</blockquote>
+<p>As you see in bad design, Inside <a href="./src/com/kamontat/dependency_inversion/bad/src/WeatherTracker.java">WeatherTracker</a> class have <a href="./src/com/kamontat/dependency_inversion/bad/src/Phone.java">Phone</a> and <a href="./src/com/kamontat/dependency_inversion/bad/src/Emailer.java">Emailer</a> class, which bad design because if I try to create new receiver like <code>SMS</code> class, I need to modify code 2 place (in <code>SMS.java</code> and <code>WeatherTracker.java</code>). To fix this issue, in good code it use <a href="./src/com/kamontat/dependency_inversion/good/src/Notifier.java">Notifier</a> which contain action method if it receive message. Now instead of have client code (<a href="./src/com/kamontat/dependency_inversion/bad/src/Phone.java">Phone</a> and <a href="./src/com/kamontat/dependency_inversion/bad/src/Emailer.java">Emailer</a>) inside server code (<a href="./src/com/kamontat/dependency_inversion/bad/src/WeatherTracker.java">WeatherTracker</a>), we use <a href="./src/com/kamontat/dependency_inversion/good/src/Notifier.java">Notifier</a> pass as parameter to notify. So that <a href="./src/com/kamontat/dependency_inversion/good/src/Notifier.java">Notifier</a> became to <code>interface</code> that allow another class to implement it.</p>
+<h3 id="interfacesegregationprinciplesrccomkamontatinterface_segregation"><a href="./src/com/kamontat/interface_segregation">Interface Segregation Principle</a></h3>
+<blockquote>
+  <p>Clients should not be forced to depend on any interfaces they do not use.</p>
+</blockquote>
+<p>For example of this is <a href="./src/com/kamontat/interface_segregation/bad/src/Bird.java">Bird</a> class, The bad design will auto appear since no all of bird can fly so like in the bad code design <a href="./src/com/kamontat/interface_segregation/bad/src/Eagle.java">Eagle</a> and <a href="./src/com/kamontat/interface_segregation/bad/src/Penguin.java">Penguin</a> that in <a href="./src/com/kamontat/interface_segregation/bad/src/Penguin.java">Penguin</a> fly method throw <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/UnsupportedOperationException.html">UnsupportedOperationException</a>. In new design (<a href="./src/com/kamontat/interface_segregation/good/src">the good one</a>) it separate all of action as new interface.</p>
+<p>For example:</p>
+<ul>
+<li><a href="./src/com/kamontat/interface_segregation/good/src/FlyingCreature.java">FlyingCreature</a></li>
+<li><a href="./src/com/kamontat/interface_segregation/good/src/FeatheredCreature.java">FeatheredCreature</a></li>
+<li><a href="./src/com/kamontat/interface_segregation/good/src/SwimmingCreature.java">SwimmingCreature</a></li>
+</ul>
+<h3 id="liskovsubstitutionprinciplesrccomkamontatliskov_substitution"><a href="./src/com/kamontat/liskov_substitution">Liskov Substitution Principle</a></h3>
+<blockquote>
+  <p>Functions that references to base classes must be able to use objects of derived classes without knowing it.</p>
+</blockquote>
+<p>As you see method <code>upgrade</code> in <a href="./src/com/kamontat/liskov_substitution/bad/src/UnitUpgrader.java">UnitUpgrader</a>, there have a code to check class of parameter is it <code>Studio</code> or not. That is should not be. To fix this issue, it try to separate class that not have same role so the adapter class (like <a href="./src/com/kamontat/liskov_substitution/good/src/BedroomAdder.java">BedroomAdder</a>) will don't have to check no matter it is.</p>
+<h3 id="openclosedprinciplesrccomkamontatopen_closed"><a href="./src/com/kamontat/open_closed">Open Closed Principle</a></h3>
+<blockquote>
+  <p>Software program should be open for extension, but closed for modification.</p>
+</blockquote>
+<p>In the <a href="./src/com/kamontat/open_closed/bad/src">bad</a> example, the issue will appear when developer want to add new way to greet people developer need to modify <a href="./src/com/kamontat/open_closed/bad/src/Greeter.java">Greeter</a>, and later on <a href="./src/com/kamontat/open_closed/bad/src/Greeter.java">Greeter</a> class will became fatty. So to fix it reference to description of open closed principle, that is extension. <a href="./src/com/kamontat/open_closed/good/src/Personality.java">Personality</a> is the interface of greeting type, and that each of class refer to each of greeting type. so if need to create new type of greet, it just create new class that implement <a href="./src/com/kamontat/open_closed/good/src/Personality.java">Personality</a> and pass to constructor method in <a href="./src/com/kamontat/open_closed/good/src/Greeter.java">Greeter</a> class.</p>
+<h3 id="singleresponsibilityprinciplesrccomkamontatsingle_responsibility"><a href="/src/com/kamontat/single_responsibility">Single Responsibility Principle</a></h3>
+<blockquote>
+  <p>Every class should have a single responsibility.
+  There should never be more than one reason for a class to change.</p>
+</blockquote>
+<p>For instance <a href="./src/com/kamontat/single_responsibility/bad/src">bad</a> example, Board class have multiple responsibility such as getting board's rows, print the board to screen. so the <strong>Single Responsibility Principle</strong> tells us that this class is actually handling far too many. Consider the <a href="./src/com/kamontat/single_responsibility/good/src/Board.java">Board</a> class in good example, this response only the values of its spots. The <a href="./src/com/kamontat/single_responsibility/good/src/BoardShaper.java">BoardShaper</a> and <a href="./src/com/kamontat/single_responsibility/good/src/BoardPresenter.java">BoardPresenter</a> class are similarly focused on specific tasks. They also pass only needed attributes; for example, BoardShaper object are initialized with only size since they don't need to know whole board.</p>
+<h2 id="images">Images</h2>
+<p><img src="./images/run-result.png" alt="run-result" /></p>
+<h2 id="creator">Creator</h2>
+<p>Kamontat Chantrachirathumrong 5810546552</p>
